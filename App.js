@@ -46,28 +46,19 @@ export default function App() {
       }
   }; 
 
-  // const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-  // const detectorConfig = {
-  //   runtime: 'mediapipe', // or 'tfjs'
-  //   solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
-  // }
-  // const detector =  faceLandmarksDetection.createDetector(model, detectorConfig);
-  // // const faces =  detector.estimateFaces(image);
-  // const faces = detector.estimateFaces(image);
-  // console.log(faces);
 
-  // const FaceCheck = async () => {
-  //   const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-  //   const detectorConfig = {
-  //     runtime: 'mediapipe', // or 'tfjs'
-  //     solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
-  //   }
+  const FaceCheck = async () => {
+    const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+    const detectorConfig = {
+      runtime: 'mediapipe', // or 'tfjs'
+      solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+    }
 
-  //   const detector =  faceLandmarksDetection.createDetector(model, detectorConfig);
-  //   // const faces =  detector.estimateFaces(image);
-  //   const faces = detector.estimateFaces(image);
-  //   console.log(faces);
-  // }; 
+    const detector =  faceLandmarksDetection.createDetector(model, detectorConfig);
+    // const faces =  detector.estimateFaces(image);
+    const faces = detector.estimateFaces(image);
+    console.log(faces);
+  }; 
 
   if (hasCameraPermission === null || hasGalleryPermission === false) {
     return <View />;
@@ -103,7 +94,7 @@ export default function App() {
         {image && <Image source={{uri: image}} style={{flex: 1, flexDirection: 'row'}}/>}
         
         {/* <Text style={{flex: 1, flexDirection: 'row'}}>{faces}</Text> */}
-        {/* <Button title="Face check" onPress={() => FaceCheck()} style={{flex: 1, flexDirection: 'row'}}/> */}
+        <Button title="Face check" onPress={() => FaceCheck()} style={{flex: 1, flexDirection: 'row'}}/>
     </View>
   );
 };
