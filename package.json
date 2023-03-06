@@ -9,7 +9,15 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@mediapipe/face_detection": "^0.4.1646425229",
+    "@mediapipe/face_mesh": "^0.4.1657299874",
+    "@tensorflow-models/face-detection": "1.0.0",
+    "@tensorflow-models/face-landmarks-detection": "1.0.2",
+    "@tensorflow/tfjs-converter": "3.12.0",
+    "@tensorflow/tfjs-core": "3.12.0",
     "expo": "~48.0.5",
+    "expo-camera": "~13.2.1",
+    "expo-image-picker": "~14.1.1",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.3"
