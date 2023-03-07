@@ -3136,6 +3136,11 @@ expo-constants@~14.2.0, expo-constants@~14.2.1:
     "@expo/config" "~8.0.0"
     uuid "^3.3.2"
 
+expo-face-detector@~12.1.1:
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/expo-face-detector/-/expo-face-detector-12.1.1.tgz#3d39956303cebc056785ee8f52e57ab3ffd9913d"
+  integrity sha512-J5fm2oQcj7SQXyx4dQUKP0WC5uMeo/K9BLftVMBH6HYKICtG9ar0QBzDqLv4gYkDyrPJO1h6WwvLeqm76jiOuA==
+
 expo-file-system@~15.2.0, expo-file-system@~15.2.2:
   version "15.2.2"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-15.2.2.tgz#a1ddf8aabf794f93888a146c4f5187e2004683a3"

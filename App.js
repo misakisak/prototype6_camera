@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import { FaceLandmarksDetector, faceLandmarksDetection } from '@tensorflow-models/face-landmarks-detection';
+// import { FaceLandmarksDetector, faceLandmarksDetection } from '@tensorflow-models/face-landmarks-detection';
+import * as FaceDetector from 'expo-face-detector';
+
 
 export default function App() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -11,6 +13,8 @@ export default function App() {
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
+
+  
   useEffect(() => {
     (async () => {
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
@@ -46,19 +50,22 @@ export default function App() {
       }
   }; 
 
-
-  const FaceCheck = async () => {
-    const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-    const detectorConfig = {
-      runtime: 'mediapipe', // or 'tfjs'
-      solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
-    }
-
-    const detector =  faceLandmarksDetection.createDetector(model, detectorConfig);
-    // const faces =  detector.estimateFaces(image);
-    const faces = detector.estimateFaces(image);
+  const handleFacesDetected = ({ faces }) => {
     console.log(faces);
-  }; 
+  };
+
+  // const FaceCheck = async () => {
+  //   const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+  //   const detectorConfig = {
+  //     runtime: 'mediapipe', // or 'tfjs'
+  //     solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+  //   }
+
+  //   const detector =  faceLandmarksDetection.createDetector(model, detectorConfig);
+  //   // const faces =  detector.estimateFaces(image);
+  //   const faces = detector.estimateFaces(image);
+  //   console.log(faces);
+  // }; 
 
   if (hasCameraPermission === null || hasGalleryPermission === false) {
     return <View />;
@@ -66,6 +73,7 @@ export default function App() {
   if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
   return (
     <View style={{ flex: 1 }}>
         <View style={styles.cameraContainer}>
@@ -74,6 +82,14 @@ export default function App() {
                 style={styles.fixedRatio}
                 type={type}
                 ratio={'1:1'}
+                onFacesDetected={handleFacesDetected}
+                faceDetectorSettings={{
+                  mode: FaceDetector.FaceDetectorMode.fast,
+                  detectLandmarks: FaceDetector.FaceDetectorLandmarks.all,
+                  runClassifications: FaceDetector.FaceDetectorClassifications.none,
+                  minDetectionInterval: 100,
+                  tracking: true,
+                }}
             />
         </View>
 
@@ -94,7 +110,7 @@ export default function App() {
         {image && <Image source={{uri: image}} style={{flex: 1, flexDirection: 'row'}}/>}
         
         {/* <Text style={{flex: 1, flexDirection: 'row'}}>{faces}</Text> */}
-        <Button title="Face check" onPress={() => FaceCheck()} style={{flex: 1, flexDirection: 'row'}}/>
+        {/* <Button title="Face check" onPress={() => FaceCheck()} style={{flex: 1, flexDirection: 'row'}}/> */}
     </View>
   );
 };
