@@ -56,6 +56,7 @@ export default function App() {
   }; 
 
   const handleFacesDetected = ({ faces }) => {
+    // console.log(faces[0]);
     console.log(faces[0]);
     console.log(faces[0].smilingProbability);
     setSmile(faces[0]["smilingProbability"]);
@@ -73,7 +74,8 @@ export default function App() {
       setLeftimage('https://thumb.ac-illust.com/e2/e25138239ab50fb8e744f771ae3a031b_t.jpeg');
     }
 
-    console.log(faces[0].rightEyeOpenProbability);
+    // console.log(faces[0].rightEyeOpenProbability);
+    console.log(faces[0].rightEyePosition);
     setRighteye(faces[0]["rightEyeOpenProbability"]);
     if (righteye > 0.7) {
       setRightimage("https://thumb.ac-illust.com/1f/1f6af8696ff26d604faed153dd362a1d_t.jpeg");
@@ -101,7 +103,7 @@ export default function App() {
           onFacesDetected={handleFacesDetected}
           faceDetectorSettings={{
             mode: FaceDetector.FaceDetectorMode.fast,
-            detectLandmarks: FaceDetector.FaceDetectorLandmarks.none,
+            detectLandmarks: FaceDetector.FaceDetectorLandmarks.all,
             /*FaceDetectorLandmarks 顔のパーツの位置を教えてくれる*/
             runClassifications: FaceDetector.FaceDetectorClassifications.all,
             /*FaceDetectorClassifications 笑っているか、目が開いているかを教えてくれる*/
